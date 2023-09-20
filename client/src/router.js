@@ -7,14 +7,14 @@ function loadPage(page) {
 
 const routes = [
   {
-    path: '/',
+    path: '/events',
     name: 'Home',
     component: loadPage('HomePage')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: loadPage('AboutPage')
+    path: '/events/:eventId',
+    name: 'Event Details',
+    component: loadPage('EventDetailsPage')
   },
   {
     path: '/account',

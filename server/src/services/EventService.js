@@ -21,7 +21,7 @@ class eventService {
 
     async editEvent(eventData, eventId) {
         const original = await this.getOneEvent(eventId)
-        if (original.isCanceled) { throw new BadRequest('Invalid Request: Event is already Cancelled') }
+        if (original.isCanceled) { throw new BadRequest('Invalid Request: Event is already Canceled') }
         original.name = eventData.name || original.name
         original.description = eventData.description || original.description
         original.coverImg = eventData.coverImg || original.coverImg

@@ -28,7 +28,7 @@ setup() {
 <style lang="scss" scoped>
 .event-card{
   img{
-    height: 25vh;
+    min-height: 25vh;
     width: 100%;
     object-fit: cover;
     object-position: center;

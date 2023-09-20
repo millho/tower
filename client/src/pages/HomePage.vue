@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <section class="row justify-content-between">
+    <section class="row">
       <button class="col btn btn-outline-primary" @click="filter = 'concert'">
         Concerts
       </button>
@@ -18,7 +18,7 @@
       </button>
     </section>
     <section class="row">
-      <div v-for="event in events" :key="event.id" class="col-12 col-md-3 event-card rounded elevation-3 g-3">
+      <div v-for="event in events" :key="event.id" class="col-12 col-md-3 event-card card g-3">
         <EventCard :event="event"/>
       </div>
     </section>

@@ -17,6 +17,10 @@ class eventService{
         logger.log('fetched event ✅', res.data)
         AppState.activeEvent = new Event(res.data)
     }
+
+    async cancelEvent(eventId){
+        await api.delete(`/api/events/${eventId}`)
+    }
 }
 
 export const EventService = new eventService()

@@ -9,7 +9,14 @@ class commentService {
     }
 
     async getEventComments(eventId) {
+        const comments = await dbContext.Comment.find({ eventId }).populate('creator', '-email')
+        return comments
+    }
 
+    async deleteComment(commentId) {
+        const comment = await dbContext.Comment.findById(commentId)
+        await comment.remove()
+        return 'Comment deleted'
     }
 }
 

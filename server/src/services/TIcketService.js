@@ -10,6 +10,22 @@ class ticketService {
         await ticket.populate('event')
         return ticket
     }
+
+    async deleteTicket(ticketId) {
+        const ticket = dbContext.Ticket.findById(ticketId)
+        await ticket.remove()
+        return 'Ticket Deleted'
+    }
+
+    async getAccountTickets(accountId) {
+        const tickets = await dbContext.Ticket.find({ accountId }).populate('event profile')
+        return tickets
+    }
+
+    async getEventTickets(eventId) {
+        const tickets = await dbContext.Ticket.find({ eventId }).populate('event profile')
+        return tickets
+    }
 }
 
 export const TicketService = new ticketService

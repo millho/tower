@@ -19,7 +19,7 @@
         <h5 class="mb-2 text-primary">{{ event.type }}</h5>
         <h5 class="mb-2">Capacity: {{ event.capacity }}</h5>
         <h3 class="mb-2">Tickets Left: {{event.capacity-event.ticketCount}}/{{ event.capacity }}</h3>
-        <button class="btn btn-warning">Attend</button>
+        <button @click="createTicket" class="btn btn-warning">Attend</button>
       </div>
       <div class="col-12 col-md-6">
         <p>{{ event.description }}</p>
@@ -44,6 +44,7 @@ import { EventService } from '../services/EventService';
 import { computed, ref, watchEffect } from 'vue';
 import {AppState} from '../AppState'
 import {CommentService} from '../services/CommentService'
+import {TicketService} from '../services/TicketService'
 
 export default {
 setup() {
@@ -53,6 +54,7 @@ const commentData = ref({});
 watchEffect(()=>{
   getOneEvent();
   getEventComments();
+  getEventTickets();
 });
 
 async function getOneEvent(){
@@ -71,10 +73,19 @@ async function getEventComments(){
   }
 }
 
+async function getEventTickets(){
+  try {
+    await TicketService.getEventTickets(route.params.eventId)
+  } catch (error) {
+    Pop.error(error)
+  }
+}
+
   return {
     commentData,
     event: computed(()=> AppState.activeEvent),
     comments: computed(()=> AppState.activeComments),
+    tickets: computed(()=> AppState.activeTickets),
 
     async createComment(){
       try {
@@ -82,6 +93,15 @@ async function getEventComments(){
         await CommentService.createComment(commentData.value)
         Pop.toast('Comment Created!', 'success')
         commentData.value = {}
+      } catch (error) {
+        Pop.error(error)
+      }
+    },
+
+    async createTicket(){
+      try {
+        const ticketData = {eventId: route.params.eventId}
+        await TicketService.createTicket(ticketData)
       } catch (error) {
         Pop.error(error)
       }

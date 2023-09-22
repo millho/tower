@@ -18,6 +18,12 @@ class eventService{
         AppState.activeEvent = new Event(res.data)
     }
 
+    async getMyEvents(creatorId){
+        const res = await api.get(`/api/events?creatorId=${creatorId}`)
+        logger.log('fetched events ✅', res.data)
+        AppState.myEvents = res.data.map(event=> new Event(event))
+    }
+
     async cancelEvent(eventId){
         await api.delete(`/api/events/${eventId}`)
     }

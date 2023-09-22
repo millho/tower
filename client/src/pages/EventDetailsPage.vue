@@ -24,6 +24,9 @@
         <h3 class="mb-2">Tickets Left: {{ticketsLeft}}/{{ event.capacity }}</h3>
         <button v-if="!event.isCanceled && event.ticketCount != event.capacity && !hasTicket" @click="createTicket" class="btn btn-warning">Attend</button>
         <button v-if="hasTicket" @click="deleteTicket" class="btn btn-danger">Refund Ticket</button>
+        <div class="my-3">
+          <img class="ticket-image" v-for="ticket in tickets" :src="ticket.profile.picture" :key="ticket.id" alt="">
+        </div>
       </div>
       <div class="col-12 col-md-6">
         <p>{{ event.description }}</p>
@@ -149,5 +152,12 @@ async function getEventTickets(){
   width: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.ticket-image{
+  width: 10%;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  object-fit: cover;
 }
 </style>

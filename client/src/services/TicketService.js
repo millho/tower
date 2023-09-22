@@ -14,6 +14,11 @@ class ticketService{
         AppState.activeTickets = res.data.map(ticket=> new Ticket(ticket))
     }
 
+    async getMyTickets(){
+        const res = await api.get('account/tickets')
+        AppState.myTickets = res.data.map(ticket=> new Ticket(ticket))
+    }
+
     async deleteTicket(ticketId){
         await api.delete(`/api/tickets/${ticketId}`)
         let index = AppState.activeTickets.findIndex(ticket => ticket.id == ticketId)

@@ -26,7 +26,8 @@ export class TicketController extends BaseController {
     async deleteTicket(req, res, next) {
         try {
             const ticketId = req.params.ticketId
-            const message = await TicketService.deleteTicket(ticketId)
+            const userId = req.userInfo.id
+            const message = await TicketService.deleteTicket(ticketId, userId)
             res.send(message)
         } catch (error) {
             next(error)

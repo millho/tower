@@ -1,7 +1,7 @@
 import { dbContext } from "../db/DbContext.js"
+import { Forbidden } from "../utils/Errors.js"
 import { EventService } from "./EventService.js"
 
-//REVIEW cannot read properties reading 'id' error on postman... 
 
 class ticketService {
     async createTicket(ticketData) {
@@ -11,8 +11,9 @@ class ticketService {
         return ticket
     }
 
-    async deleteTicket(ticketId) {
-        const ticket = dbContext.Ticket.findById(ticketId)
+    async deleteTicket(ticketId, userId) {
+        const ticket = await dbContext.Ticket.findById(ticketId)
+        if (ticket.accountId != userId) { throw new Forbidden }
         await ticket.remove()
         return 'Ticket Deleted'
     }

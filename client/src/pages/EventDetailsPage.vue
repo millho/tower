@@ -49,7 +49,6 @@ import { computed, ref, watchEffect } from 'vue';
 import {AppState} from '../AppState'
 import {CommentService} from '../services/CommentService'
 import {TicketService} from '../services/TicketService'
-import { applyStyles } from '@popperjs/core';
 
 export default {
 setup() {
@@ -112,6 +111,7 @@ async function getEventTickets(){
       try {
         const ticketData = {eventId: route.params.eventId}
         await TicketService.createTicket(ticketData)
+        Pop.toast('Ticket Purchased!', 'success')
       } catch (error) {
         Pop.error(error)
       }
@@ -121,6 +121,7 @@ async function getEventTickets(){
       try {
         const ticket = AppState.activeTickets.find(ticket=> ticket.accountId == AppState.account.id)
         await TicketService.deleteTicket(ticket.id)
+        Pop.toast('Refund Processed!', 'success')
       } catch (error) {
         Pop.error(error)
       }

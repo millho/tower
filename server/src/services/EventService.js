@@ -19,8 +19,11 @@ class eventService {
         return event
     }
 
-    async editEvent(eventData, eventId) {
+    async editEvent(eventData, object) {
+        const eventId = object.eventId
+        const userId = object.accountId
         const original = await this.getOneEvent(eventId)
+        if (original.creatorId != userId) { throw new Forbidden }
         if (original.isCanceled) { throw new BadRequest('Invalid Request: Event is already Canceled') }
         original.name = eventData.name || original.name
         original.description = eventData.description || original.description

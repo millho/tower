@@ -114,6 +114,7 @@ async function getEventTickets(){
       try {
         const ticketData = {eventId: route.params.eventId}
         await TicketService.createTicket(ticketData)
+        
         Pop.toast('Ticket Purchased!', 'success')
       } catch (error) {
         Pop.error(error)

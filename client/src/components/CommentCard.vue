@@ -24,10 +24,12 @@ setup(props) {
 
     async deleteComment(){
       try {
-        await Pop.confirm('Delete Comment?')
-        const commentId = props.comment.id
-        await CommentService.deleteComment(commentId)
-        Pop.toast('Comment Deleted!', 'success')
+       if( await Pop.confirm('Delete Comment?')){
+
+         const commentId = props.comment.id
+         await CommentService.deleteComment(commentId)
+         Pop.toast('Comment Deleted!', 'success')
+        }
       } catch (error) {
         Pop.error(error)
       }

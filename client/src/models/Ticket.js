@@ -1,3 +1,4 @@
+import { Event } from "../models/Event.js"
 
 
 export class Ticket{
@@ -5,7 +6,7 @@ export class Ticket{
         this.id = data.id
         this.eventId = data.eventId
         this.accountId = data.accountId
-        this.event = data.event
+        this.event = new Event(data.event)
         this.profile = data.profile
     }
 }

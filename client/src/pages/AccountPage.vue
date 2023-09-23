@@ -5,9 +5,15 @@
     <p>{{ account.email }}</p>
   </div>
   <section class="row">
-    <div v-for="ticket in myTickets" :key="ticket.id" class="col-12 col-md-2 event-card card bg-primary g-3">
+    <!-- <div v-for="ticket in myTickets" :key="ticket.id" class="col-12 col-md-2 event-card card bg-primary g-3">
       <TicketCard :ticket="ticket" />
-    </div>  
+    </div>   -->
+
+
+   <div v-for="ticket in myTickets" :key="ticket.id" class=" col-12 col-md-2 event-card card bg-primary g-3">
+        <EventCard :event="ticket.event" />
+      </div>  
+
   </section>
 </template>
 

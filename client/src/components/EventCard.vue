@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{path: `events/${event.id}`}">
-    <section class="row event-card text-dark">
+    <section class="row event-card text-dark border border-dark rounded elevation-4 ">
       <div class="col-12 col-md-6">
         <img :src="event.coverImg" alt="">
       </div>
@@ -28,11 +28,16 @@ setup() {
 <style lang="scss" scoped>
 .event-card{
   img{
-    min-height: 25vh;
+    height: 25vh;
     width: 100%;
     object-fit: cover;
     object-position: center;
   }
+}
+
+.event-card:hover{
+  cursor: pointer;
+  transform: scale(1.01);
 }
 
 </style>

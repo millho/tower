@@ -18,7 +18,7 @@
       </button>
     </section>
     <section class="row">
-      <div v-for="event in events" :key="event.id" class="col-12 col-md-3 event-card card g-3">
+      <div v-for="event in events" :key="event.id" class="col-12 col-md-3 event-card px-md-4 g-3">
         <EventCard :event="event"/>
       </div>
     </section>
@@ -61,8 +61,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.event-card:hover{
-  cursor: pointer;
-  transform: scale(1.01);
-}
+
 </style>
